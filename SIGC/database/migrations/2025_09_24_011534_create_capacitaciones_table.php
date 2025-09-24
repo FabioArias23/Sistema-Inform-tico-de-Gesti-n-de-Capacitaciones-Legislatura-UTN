@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('capacitaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('descripcion');
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
-            $table->time('hora_inicio');
-            $table->time('hora_fin');
-            $table->unsignedInteger('cupo_maximo');
-            $table->unsignedInteger('cupo_actual')->default(0);
-            $table->string('imagen')->nullable();
+            $table->string('tematica'); // Campo para el tema de la capacitación
+            $table->string('nombre'); // Nombre o título de la capacitación
+            $table->text('descripcion')->nullable(); // Descripción detallada
+            $table->enum('modalidad', ['presencial', 'virtual', 'hibrida']); // Modalidad de la capacitación
+            $table->date('fecha_inicio'); // Fecha de inicio
+            $table->date('fecha_fin'); // Fecha de finalización
+            $table->time('hora_inicio')->nullable(); // Hora de inicio (opcional)
+            $table->time('hora_fin')->nullable(); // Hora de finalización (opcional)
+            $table->unsignedInteger('cupos'); // Número total de cupos disponibles
+            $table->unsignedInteger('cupos_disponibles')->default(0); // Número de cupos que quedan
+            $table->string('imagen_destacada')->nullable(); // Una imagen para la capacitación
             $table->timestamps();
         });
     }
